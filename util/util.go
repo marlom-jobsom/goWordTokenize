@@ -1,21 +1,10 @@
 package util
 
 import (
-	"flag"
 	"net"
 	"strings"
 	"word-tokenize-middleware-socket/core"
 )
-
-// GetCliArgs ... Get argument from CLI
-func GetCliArgs() string {
-	var text string
-
-	flag.StringVar(&text, "text", "", "Text to be tokenize")
-	flag.Parse()
-
-	return text
-}
 
 // ReceiveText ... Receive the text content from connection
 func ReceiveText(connection net.Conn) string {
