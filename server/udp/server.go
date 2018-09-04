@@ -8,10 +8,11 @@ import (
 	"word-tokenize-middleware-socket/util"
 )
 
-func buildServer() *net.UDPConn {
-	udpTag := "udp"
-	udpResolver, _ := net.ResolveUDPAddr(udpTag, ":5000")
-	connection, _ := net.ListenUDP(udpTag, udpResolver)
+func buildUDPConnection() *net.UDPConn {
+	udpResolver, _ := net.ResolveUDPAddr("udp", ":5000")
+	connection, _ := net.ListenUDP("udp", udpResolver)
+
+	log.Println("UDP server address:", connection.LocalAddr())
 	return connection
 }
 
@@ -34,8 +35,10 @@ func buildResponse(connection *net.UDPConn, request core.Request, requestAddress
 }
 
 func main() {
-	log.Println("Starting UDP server")
-	connection := buildServer()
+	connection := buildUDPConnection()
+
+	// Close the connection when the application closes.
+	defer connection.Close()
 
 	for {
 		request, requestAddress := handleRequest(connection)
