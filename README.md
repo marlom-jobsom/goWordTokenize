@@ -8,6 +8,8 @@ $ go run client/client.go --help
 Usage of client:
   -protocol string
     	The client network prototol (tcp or udp)
+  -test
+    	Enable client test mode
   -text string
     	Text to be tokenize
 ```

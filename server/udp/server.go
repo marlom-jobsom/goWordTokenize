@@ -8,7 +8,7 @@ import (
 	"word-tokenize-middleware-socket/util"
 )
 
-func buildUDPConnection() *net.UDPConn {
+func buildUDPListener() *net.UDPConn {
 	udpResolver, _ := net.ResolveUDPAddr("udp", ":5000")
 	connection, _ := net.ListenUDP("udp", udpResolver)
 
@@ -35,13 +35,13 @@ func buildResponse(connection *net.UDPConn, request core.Request, requestAddress
 }
 
 func main() {
-	connection := buildUDPConnection()
+	listener := buildUDPListener()
 
-	// Close the connection when the application closes.
-	defer connection.Close()
+	// Close the listener when the application closes.
+	defer listener.Close()
 
 	for {
-		request, requestAddress := handleRequest(connection)
-		buildResponse(connection, request, requestAddress)
+		request, requestAddress := handleRequest(listener)
+		buildResponse(listener, request, requestAddress)
 	}
 }

@@ -1,7 +1,9 @@
 package util
 
 import (
+	"log"
 	"strings"
+	"time"
 	"word-tokenize-middleware-socket/core"
 )
 
@@ -20,4 +22,11 @@ func TextTokenize(request core.Request) []string {
 	}
 
 	return tokens
+}
+
+// TimeTrack ... Timing function calls
+func TimeTrack(start time.Time, name string) time.Duration {
+	elapsed := time.Since(start)
+	log.Printf("TimeTrack: %s took %s", name, elapsed)
+	return elapsed
 }

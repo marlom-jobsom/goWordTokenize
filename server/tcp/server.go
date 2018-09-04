@@ -8,9 +8,8 @@ import (
 	"word-tokenize-middleware-socket/util"
 )
 
-func buildListener() net.Listener {
+func buildTCPListener() net.Listener {
 	listen, _ := net.Listen("tcp", ":5000")
-
 	log.Println("TCP server address:", listen.Addr())
 	return listen
 }
@@ -18,7 +17,6 @@ func buildListener() net.Listener {
 func handleRequest(connection net.Conn, jsonDecoder *json.Decoder) core.Request {
 	var request core.Request
 	jsonDecoder.Decode(&request)
-
 	log.Println("Receive:", request)
 	return request
 }
@@ -30,17 +28,20 @@ func buildResponse(request core.Request, jsonEncoder *json.Encoder) {
 }
 
 func main() {
-	listen := buildListener()
+	listener := buildTCPListener()
+
+	// Close the listener when the application closes.
+	defer listener.Close()
 
 	for {
-		connection, _ := listen.Accept()
+		connection, _ := listener.Accept()
 		jsonEncoder := json.NewEncoder(connection)
 		jsonDecoder := json.NewDecoder(connection)
 
-		// Close the connection when the application closes.
-		defer connection.Close()
-
 		request := handleRequest(connection, jsonDecoder)
 		buildResponse(request, jsonEncoder)
+
+		// Close the connection when finish to handle it
+		connection.Close()
 	}
 }
