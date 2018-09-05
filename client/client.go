@@ -43,22 +43,21 @@ func handleResponse(jsonDecoder *json.Decoder) {
 }
 
 func testExecution(protocol string) {
-	requestNum := 10000
-	text := "Silence is golden"
-	defer util.TimeTrack(time.Now(), "testExecution")
+	requestNum := 50
+	text := "is Silence is golden"
+	defer util.TimeTrack(time.Now(), "testExecution", protocol)
 
 	for i := 0; i < requestNum; i++ {
 		connection, jsonEncoder, jsonDecoder := buildConnection(protocol)
-
-		test(text, jsonEncoder, jsonDecoder)
+		test(text, jsonEncoder, jsonDecoder, protocol)
 
 		// Close the connection when finish to handle it
 		connection.Close()
 	}
 }
 
-func test(text string, jsonEncoder *json.Encoder, jsonDecoder *json.Decoder) {
-	defer util.TimeTrack(time.Now(), "test")
+func test(text string, jsonEncoder *json.Encoder, jsonDecoder *json.Decoder, protocol string) {
+	defer util.TimeTrack(time.Now(), "test", protocol)
 	buildRequest(text, jsonEncoder)
 	handleResponse(jsonDecoder)
 }

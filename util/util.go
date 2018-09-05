@@ -1,7 +1,10 @@
 package util
 
 import (
+	"bufio"
+	"fmt"
 	"log"
+	"os"
 	"strings"
 	"time"
 	"word-tokenize-middleware-socket/core"
@@ -25,8 +28,25 @@ func TextTokenize(request core.Request) []string {
 }
 
 // TimeTrack ... Timing function calls
-func TimeTrack(start time.Time, name string) time.Duration {
+func TimeTrack(start time.Time, name string, filePath string) time.Duration {
 	elapsed := time.Since(start)
 	log.Printf("TimeTrack: %s took %s", name, elapsed)
+
+	elapsedNano := elapsed.Nanoseconds()
+	AppendContentFile(filePath, fmt.Sprint(elapsedNano))
 	return elapsed
+}
+
+// AppendContentFile ... Append content to a existing file
+func AppendContentFile(filePath string, content string) {
+	if _, err := os.Stat(filePath); os.IsNotExist(err) {
+		os.Create(filePath)
+	}
+
+	file, _ := os.OpenFile(filePath, os.O_APPEND|os.O_WRONLY, 0644)
+	defer file.Close()
+
+	writer := bufio.NewWriter(file)
+	writer.WriteString(content + "\n")
+	writer.Flush()
 }
