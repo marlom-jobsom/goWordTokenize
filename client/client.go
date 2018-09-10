@@ -6,8 +6,8 @@ import (
 	"log"
 	"net"
 	"time"
-	"word-tokenize-middleware-socket/core"
-	"word-tokenize-middleware-socket/util"
+	"word-tokenize-socket/core"
+	"word-tokenize-socket/util"
 )
 
 func getCliArgs() (string, string, bool) {

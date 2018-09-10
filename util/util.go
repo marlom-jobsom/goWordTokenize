@@ -7,7 +7,7 @@ import (
 	"os"
 	"strings"
 	"time"
-	"word-tokenize-middleware-socket/core"
+	"word-tokenize-socket/core"
 )
 
 // TextTokenize ... Tokenize a text content
