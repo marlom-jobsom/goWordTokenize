@@ -2,46 +2,22 @@ package util
 
 import (
 	"bufio"
-	"fmt"
-	"log"
+	"net"
+	"net/rpc"
 	"os"
-	"strings"
-	"time"
-	"word-tokenize-socket/core"
+	"word-tokenize-socket/constant"
 )
 
-// TextTokenize ... Tokenize a text content
-func TextTokenize(request core.Request) []string {
-	var tokens []string
-	mapTokens := make(map[string]struct{})
-	words := strings.Split(request.Content, " ")
-
-	for _, word := range words {
-		mapTokens[word] = struct{}{}
-	}
-
-	for key := range mapTokens {
-		tokens = append(tokens, key)
-	}
-
-	return tokens
-}
-
-// TimeTrack ... Timing function calls
-func TimeTrack(start time.Time, name string, filePath string) time.Duration {
-	elapsed := time.Since(start)
-	log.Printf("TimeTrack: %s took %s", name, elapsed)
-
-	elapsedNano := elapsed.Nanoseconds()
-	AppendContentFile(filePath, fmt.Sprint(elapsedNano))
-	return elapsed
-}
-
-// AppendContentFile ... Append content to a existing file
-func AppendContentFile(filePath string, content string) {
+// CreateFileIfDoestNotExists creates a file for the path given if it doesn't exists
+func CreateFileIfDoestNotExists(filePath string) {
 	if _, err := os.Stat(filePath); os.IsNotExist(err) {
 		os.Create(filePath)
 	}
+}
+
+// AppendContentFile appends content to a existing file
+func AppendContentFile(filePath string, content string) {
+	CreateFileIfDoestNotExists(filePath)
 
 	file, _ := os.OpenFile(filePath, os.O_APPEND|os.O_WRONLY, 0644)
 	defer file.Close()
@@ -49,4 +25,32 @@ func AppendContentFile(filePath string, content string) {
 	writer := bufio.NewWriter(file)
 	writer.WriteString(content + "\n")
 	writer.Flush()
+}
+
+// DialTCPConnection dials to a TCP connection
+func DialTCPConnection() net.Conn {
+	return buildConnection(constant.TCP)
+}
+
+// DialUDPConnection dials to a UDP connection
+func DialUDPConnection() net.Conn {
+	return buildConnection(constant.UDP)
+}
+
+// DialRPCTCPClient dials to remote procedure call over TCP
+func DialRPCTCPClient() *rpc.Client {
+	rpcClient, _ := rpc.Dial(constant.TCP, constant.PORT)
+	return rpcClient
+}
+
+// DialRPCUDPClient dials to remote procedure call over UDP
+func DialRPCUDPClient() *rpc.Client {
+	rpcClient, _ := rpc.Dial(constant.UDP, constant.PORT)
+	return rpcClient
+}
+
+// Helper: dials to a connection under the protocol given
+func buildConnection(protocol string) net.Conn {
+	connection, _ := net.Dial(protocol, constant.PORT)
+	return connection
 }

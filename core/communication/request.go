@@ -1,4 +1,4 @@
-package core
+package communication
 
 // Request ...
 type Request struct {
