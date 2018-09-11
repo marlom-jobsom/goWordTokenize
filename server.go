@@ -1,10 +1,10 @@
 package main
 
 import (
-	"word-tokenize-socket/core/communication"
+	"word-tokenize-in1118/core/communication"
 )
 
 func main() {
 	server := new(communication.TokenizerServer)
-	server.BringUpRPCTCPServer()
+	server.BringUpTCPServer()
 }

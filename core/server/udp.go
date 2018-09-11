@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"log"
 	"net"
-	"word-tokenize-socket/core"
-	"word-tokenize-socket/util"
+	"word-tokenize-in1118/core"
+	"word-tokenize-in1118/util"
 )
 
 func buildUDPListener() *net.UDPConn {

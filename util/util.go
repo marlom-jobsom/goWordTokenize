@@ -5,7 +5,7 @@ import (
 	"net"
 	"net/rpc"
 	"os"
-	"word-tokenize-socket/constant"
+	"word-tokenize-in1118/constant"
 )
 
 // CreateFileIfDoestNotExists creates a file for the path given if it doesn't exists

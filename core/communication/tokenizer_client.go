@@ -6,50 +6,49 @@ import (
 	"net"
 	"net/rpc"
 	"time"
-	"word-tokenize-socket/constant"
-	"word-tokenize-socket/util"
+	"word-tokenize-in1118/constant"
+	"word-tokenize-in1118/util"
 )
 
 // TokenizerClient ...
 type TokenizerClient struct{}
 
 // TextTokenizeTCP performs a TCP request to text tokenize
-func (tc *TokenizerClient) TextTokenizeTCP(text string) []string {
+func (tc *TokenizerClient) TextTokenizeTCP(text string) Response {
 	connection := util.DialTCPConnection()
 	defer connection.Close()
 	log.Println("TextTokenizeTCP: Request", text)
 	response := tokenizeRequest(text, connection)
-	log.Println("TextTokenizeTCP: Response", text)
-	return response.Content
+	log.Println("TextTokenizeTCP: Response", response)
+	return response
 }
 
 // TextTokenizeRPCTCP performs a remote procedure call over TCP to text tokenize
-func (tc *TokenizerClient) TextTokenizeRPCTCP(text string) []string {
+func (tc *TokenizerClient) TextTokenizeRPCTCP(text string) Response {
 	client := util.DialRPCTCPClient()
 	log.Println("TextTokenizeRPCTCP: Request", text)
 	response := tokenizeRequestRPC(text, client)
 	log.Println("TextTokenizeRPCTCP: Response", response)
-	return response.Content
+	return response
 }
 
 // TextTokenizeUDP performs a UDP request to text tokenize
-func (tc *TokenizerClient) TextTokenizeUDP(text string) []string {
+func (tc *TokenizerClient) TextTokenizeUDP(text string) Response {
 	connection := util.DialUDPConnection()
 	defer connection.Close()
 	log.Println("TextTokenizeUDP: Request", text)
 	response := tokenizeRequest(text, connection)
 	log.Println("TextTokenizeUDP: Response", text)
-	return response.Content
+	return response
 }
 
 // TextTokenizeRPCUDP performs a remote procedure call over UDP to text tokenize
-func (tc *TokenizerClient) TextTokenizeRPCUDP(text string) []string {
-	var tokens []string
+func (tc *TokenizerClient) TextTokenizeRPCUDP(text string) Response {
 	client := util.DialRPCUDPClient()
 	log.Println("TextTokenizeRPCUDP: Request", text)
-	client.Call(constant.NLGTextTokenizeRPC, text, &tokens)
-	log.Println("TextTokenizeRPCUDP: Response", tokens)
-	return tokens
+	response := tokenizeRequestRPC(text, client)
+	log.Println("TextTokenizeRPCUDP: Response", response)
+	return response
 }
 
 // Helper: trigger the text tokenize RPC request

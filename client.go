@@ -3,9 +3,9 @@ package main
 import (
 	"fmt"
 	"log"
-	"word-tokenize-socket/constant"
-	"word-tokenize-socket/core"
-	"word-tokenize-socket/core/communication"
+	"word-tokenize-in1118/constant"
+	"word-tokenize-in1118/core"
+	"word-tokenize-in1118/core/communication"
 )
 
 func main() {
