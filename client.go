@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	text, protocol, rpc, test := core.GetCliArgs()
+	text, protocol, rpc, test := core.GetClientArgs()
 	client := new(communication.TokenizerClient)
 	log.Printf("Test: %t", test)
 
@@ -17,10 +17,11 @@ func main() {
 		switch protocol {
 		case constant.TCP:
 			client.TextTokenizeRPCTCP(text)
-		case constant.UDP:
-			client.TextTokenizeRPCUDP(text)
 		default:
-			log.Fatal(fmt.Errorf(constant.ErrorPattern, constant.TCP, constant.UDP))
+			// RPC over UDP is not supported by Golang
+			// https://astaxie.gitbooks.io/build-web-application-with-golang/en/08.4.html
+			// https://ipfs.io/ipfs/QmfYeDhGH9bZzihBUDEQbCbTc5k5FZKURMUoUvfmc27BwL/rpc/go_rpc.html
+			log.Fatal(fmt.Errorf(constant.RPCUDPPatternError, constant.TCP))
 		}
 	} else {
 		switch protocol {
@@ -29,7 +30,7 @@ func main() {
 		case constant.UDP:
 			client.TextTokenizeUDP(text)
 		default:
-			log.Fatal(fmt.Errorf(constant.ErrorPattern, constant.TCP, constant.UDP))
+			log.Fatal(fmt.Errorf(constant.ProtolPatternError, constant.TCP, constant.UDP))
 		}
 	}
 }

@@ -43,12 +43,6 @@ func DialRPCTCPClient() *rpc.Client {
 	return rpcClient
 }
 
-// DialRPCUDPClient dials to remote procedure call over UDP
-func DialRPCUDPClient() *rpc.Client {
-	rpcClient, _ := rpc.Dial(constant.UDP, constant.PORT)
-	return rpcClient
-}
-
 // Helper: dials to a connection under the protocol given
 func buildConnection(protocol string) net.Conn {
 	connection, _ := net.Dial(protocol, constant.PORT)

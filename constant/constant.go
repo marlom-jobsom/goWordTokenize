@@ -2,7 +2,8 @@ package constant
 
 // Constants
 const (
-	ErrorPattern       = "Wrong protocol given. Available options: \"%s\" and \"%s\""
+	ProtolPatternError = "Wrong protocol given. Available options: \"%s\" and \"%s\""
+	RPCUDPPatternError = "Wrong protocol given. Available options: \"%s\""
 	TCP                = "tcp"
 	UDP                = "udp"
 	PORT               = ":5000"

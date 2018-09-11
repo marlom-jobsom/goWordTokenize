@@ -26,6 +26,7 @@ func (tc *TokenizerClient) TextTokenizeTCP(text string) Response {
 // TextTokenizeRPCTCP performs a remote procedure call over TCP to text tokenize
 func (tc *TokenizerClient) TextTokenizeRPCTCP(text string) Response {
 	client := util.DialRPCTCPClient()
+	defer client.Close()
 	log.Println("TextTokenizeRPCTCP: Request", text)
 	response := tokenizeRequestRPC(text, client)
 	log.Println("TextTokenizeRPCTCP: Response", response)
@@ -38,16 +39,7 @@ func (tc *TokenizerClient) TextTokenizeUDP(text string) Response {
 	defer connection.Close()
 	log.Println("TextTokenizeUDP: Request", text)
 	response := tokenizeRequest(text, connection)
-	log.Println("TextTokenizeUDP: Response", text)
-	return response
-}
-
-// TextTokenizeRPCUDP performs a remote procedure call over UDP to text tokenize
-func (tc *TokenizerClient) TextTokenizeRPCUDP(text string) Response {
-	client := util.DialRPCUDPClient()
-	log.Println("TextTokenizeRPCUDP: Request", text)
-	response := tokenizeRequestRPC(text, client)
-	log.Println("TextTokenizeRPCUDP: Response", response)
+	log.Println("TextTokenizeUDP: Response", response)
 	return response
 }
 
