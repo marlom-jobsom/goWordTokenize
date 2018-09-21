@@ -6,8 +6,8 @@ import (
 	"net"
 	"net/rpc"
 	"time"
-	"word-tokenize-in1118/constant"
-	"word-tokenize-in1118/util"
+	"word-tokenize-in1118/internal/constant"
+	"word-tokenize-in1118/internal/util"
 )
 
 // TokenizerClient ...

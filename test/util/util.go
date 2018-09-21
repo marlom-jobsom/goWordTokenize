@@ -3,8 +3,8 @@ package util
 import (
 	"fmt"
 	"time"
-	"word-tokenize-in1118/core/communication"
-	"word-tokenize-in1118/util"
+	"word-tokenize-in1118/internal/core/communication"
+	"word-tokenize-in1118/internal/util"
 )
 
 // SumResponsesDuration sums the duration of all responses given

@@ -2,7 +2,7 @@ package core
 
 import (
 	"flag"
-	"word-tokenize-in1118/constant"
+	"word-tokenize-in1118/internal/constant"
 )
 
 // GetClientArgs reads the parameters from CLI interface for main client

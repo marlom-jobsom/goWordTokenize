@@ -3,8 +3,8 @@ package main
 import (
 	"log"
 	"time"
-	"word-tokenize-in1118/constant"
-	"word-tokenize-in1118/core/communication"
+	"word-tokenize-in1118/internal/constant"
+	"word-tokenize-in1118/internal/core/communication"
 	"word-tokenize-in1118/test/util"
 )
 

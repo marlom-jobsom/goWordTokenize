@@ -3,20 +3,19 @@ package main
 import (
 	"fmt"
 	"log"
-	"word-tokenize-in1118/constant"
-	"word-tokenize-in1118/core"
-	"word-tokenize-in1118/core/communication"
+	"word-tokenize-in1118/internal/constant"
+	"word-tokenize-in1118/internal/core"
+	"word-tokenize-in1118/internal/core/communication"
 )
 
 func main() {
-	text, protocol, rpc, test := core.GetClientArgs()
-	client := new(communication.TokenizerClient)
-	log.Printf("Test: %t", test)
+	protocol, rpc := core.GetServerArgs()
+	server := new(communication.TokenizerServer)
 
 	if rpc {
 		switch protocol {
 		case constant.TCP:
-			client.TextTokenizeRPCTCP(text)
+			server.BringUpRPCTCPServer()
 		default:
 			// RPC over UDP is not supported by Golang
 			// https://astaxie.gitbooks.io/build-web-application-with-golang/en/08.4.html
@@ -26,9 +25,9 @@ func main() {
 	} else {
 		switch protocol {
 		case constant.TCP:
-			client.TextTokenizeTCP(text)
+			server.BringUpTCPServer()
 		case constant.UDP:
-			client.TextTokenizeUDP(text)
+			server.BringUpUDPServer()
 		default:
 			log.Fatal(fmt.Errorf(constant.ProtolPatternError, constant.TCP, constant.UDP))
 		}
