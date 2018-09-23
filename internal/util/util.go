@@ -29,12 +29,14 @@ func AppendContentFile(filePath string, content string) {
 
 // DialTCPConnection dials to a TCP connection
 func DialTCPConnection() net.Conn {
-	return buildConnection(constant.TCP)
+	connection, _ := net.Dial(constant.TCP, constant.PORT)
+	return connection
 }
 
 // DialUDPConnection dials to a UDP connection
 func DialUDPConnection() net.Conn {
-	return buildConnection(constant.UDP)
+	connection, _ := net.Dial(constant.UDP, constant.PORT)
+	return connection
 }
 
 // DialRPCTCPClient dials to remote procedure call over TCP
@@ -43,8 +45,16 @@ func DialRPCTCPClient() *rpc.Client {
 	return rpcClient
 }
 
-// Helper: dials to a connection under the protocol given
-func buildConnection(protocol string) net.Conn {
-	connection, _ := net.Dial(protocol, constant.PORT)
+// BuildTCPListener builds a TCP listener
+func BuildTCPListener() net.Listener {
+	tcpAddress, _ := net.ResolveTCPAddr(constant.TCP, constant.PORT)
+	listen, _ := net.ListenTCP(constant.TCP, tcpAddress)
+	return listen
+}
+
+// BuildUDPListener builds a UDP listener
+func BuildUDPListener() *net.UDPConn {
+	udpResolver, _ := net.ResolveUDPAddr(constant.UDP, constant.PORT)
+	connection, _ := net.ListenUDP(constant.UDP, udpResolver)
 	return connection
 }

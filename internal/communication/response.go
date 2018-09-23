@@ -6,6 +6,6 @@ import (
 
 // Response ...
 type Response struct {
-	Content []string
+	Content  []string
 	Duration time.Duration
 }

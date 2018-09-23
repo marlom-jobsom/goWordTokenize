@@ -3,7 +3,7 @@ package util
 import (
 	"fmt"
 	"time"
-	"word-tokenize-in1118/internal/core/communication"
+	"word-tokenize-in1118/internal/communication"
 	"word-tokenize-in1118/internal/util"
 )
 
