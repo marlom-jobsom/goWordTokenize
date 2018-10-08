@@ -5,12 +5,12 @@ import (
 	"log"
 	"word-tokenize-in1118/internal"
 	"word-tokenize-in1118/internal/constant"
-	"word-tokenize-in1118/internal/infrastructure/server_request_handler/requesthandler"
+	"word-tokenize-in1118/internal/layers/infrastructure/server"
 )
 
 func main() {
 	protocol, rpc := internal.GetServerArgs()
-	requestHandler := new(requesthandler.RequestHandler)
+	requestHandler := new(server.RequestHandler)
 
 	if rpc {
 		switch protocol {

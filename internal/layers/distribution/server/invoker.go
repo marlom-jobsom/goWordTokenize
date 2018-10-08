@@ -1,4 +1,4 @@
-package invoker
+package server
 
 import (
 	"encoding/json"

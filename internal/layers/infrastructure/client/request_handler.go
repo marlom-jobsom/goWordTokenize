@@ -1,4 +1,4 @@
-package requesthandler
+package client
 
 import (
 	"encoding/json"
@@ -18,9 +18,9 @@ type RequestHandler struct{}
 // TextTokenizeRPCTCP handles a remote procedure call over TCP to text tokenize
 func (requestHandler *RequestHandler) TextTokenizeRPCTCP(text string) communication.Response {
 	client := util.DialRPCTCPClient()
+	defer client.Close()
 	log.Println(fmt.Sprintf(constant.SendingRequest, constant.RPC), text)
 	response := sendRPC(text, client)
-	client.Close()
 	log.Println(fmt.Sprintf(constant.ReceivingResponse, constant.RPC), response)
 	return response
 }
@@ -62,15 +62,15 @@ func send(request communication.Request, connection net.Conn) communication.Resp
 	var response communication.Response
 	now := time.Now()
 	json.NewEncoder(connection).Encode(request)
-	response = receive(json.NewDecoder(connection))
+	response = receive(connection)
 	elapsed := time.Since(now)
 	response.Duration = elapsed
 	return response
 }
 
 // Helper: receives a response
-func receive(jsonDecoder *json.Decoder) communication.Response {
+func receive(connection net.Conn) communication.Response {
 	var response communication.Response
-	jsonDecoder.Decode(&response)
+	json.NewDecoder(connection).Decode(&response)
 	return response
 }

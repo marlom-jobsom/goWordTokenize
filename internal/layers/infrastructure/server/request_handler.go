@@ -1,11 +1,11 @@
-package requesthandler
+package server
 
 import (
 	"encoding/json"
 	"log"
 	"net/rpc"
 	"word-tokenize-in1118/internal/constant"
-	"word-tokenize-in1118/internal/infrastructure/server_request_handler/invoker"
+	"word-tokenize-in1118/internal/layers/distribution/server"
 	"word-tokenize-in1118/internal/services/nlg"
 	"word-tokenize-in1118/internal/util"
 )
@@ -31,7 +31,7 @@ func (RequestHandler) BringUpTCPServer() {
 	listener := util.BuildTCPListener()
 	defer listener.Close()
 	log.Println(constant.Address, listener.Addr())
-	ivk := new(invoker.Invoker)
+	ivk := new(server.Invoker)
 
 	for {
 		connection, _ := listener.Accept()
@@ -48,7 +48,7 @@ func (RequestHandler) BringUpUDPServer() {
 	listener := util.BuildUDPListener()
 	defer listener.Close()
 	log.Println(constant.Address, listener.LocalAddr())
-	ivk := new(invoker.Invoker)
+	ivk := new(server.Invoker)
 
 	for {
 		ivk.InvokeTextTokenizeUDP(listener)
