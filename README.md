@@ -26,8 +26,6 @@ Usage of /tmp/go-build010583863/b001/exe/main:
 ```
 
 ## User case example
-Let's use the server on TCP and request it with the corresponding client as well
-
 1. Open a terminal and starts the server over the desired communication method. (let's use RPC over TCP as example)
 2. Open another terminal and execute a request for the RPC over TCP as well given a text to be tokenize
 
