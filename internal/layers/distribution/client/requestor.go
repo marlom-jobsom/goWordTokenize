@@ -1,8 +1,8 @@
 package client
 
 import (
-	"word-tokenize-in1118/internal/communication"
-	"word-tokenize-in1118/internal/layers/infrastructure/client"
+	"github.com/marlom-jobsom/goWordTokenize/internal/communication"
+	"github.com/marlom-jobsom/goWordTokenize/internal/layers/infrastructure/client"
 )
 
 // Requestor route handles a client_request_handler request

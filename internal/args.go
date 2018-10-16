@@ -2,7 +2,7 @@ package internal
 
 import (
 	"flag"
-	"word-tokenize-in1118/internal/constant"
+	"github.com/marlom-jobsom/goWordTokenize/internal/constant"
 )
 
 // GetClientArgs reads the parameters from CLI interface for main client_request_handler

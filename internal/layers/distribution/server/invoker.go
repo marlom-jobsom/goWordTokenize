@@ -3,11 +3,11 @@ package server
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/marlom-jobsom/goWordTokenize/internal/communication"
+	"github.com/marlom-jobsom/goWordTokenize/internal/constant"
+	"github.com/marlom-jobsom/goWordTokenize/internal/services/nlg"
 	"log"
 	"net"
-	"word-tokenize-in1118/internal/communication"
-	"word-tokenize-in1118/internal/constant"
-	"word-tokenize-in1118/internal/services/nlg"
 )
 
 // Invoker ...

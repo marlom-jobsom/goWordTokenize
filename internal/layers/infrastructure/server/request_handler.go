@@ -2,12 +2,12 @@ package server
 
 import (
 	"encoding/json"
+	"github.com/marlom-jobsom/goWordTokenize/internal/constant"
+	"github.com/marlom-jobsom/goWordTokenize/internal/layers/distribution/server"
+	"github.com/marlom-jobsom/goWordTokenize/internal/services/nlg"
+	"github.com/marlom-jobsom/goWordTokenize/internal/util"
 	"log"
 	"net/rpc"
-	"word-tokenize-in1118/internal/constant"
-	"word-tokenize-in1118/internal/layers/distribution/server"
-	"word-tokenize-in1118/internal/services/nlg"
-	"word-tokenize-in1118/internal/util"
 )
 
 // RequestHandler ...

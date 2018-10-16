@@ -1,8 +1,8 @@
 package main
 
 import (
-	"word-tokenize-in1118/internal"
-	"word-tokenize-in1118/internal/layers/distribution/client"
+	"github.com/marlom-jobsom/goWordTokenize/internal"
+	"github.com/marlom-jobsom/goWordTokenize/internal/layers/distribution/client"
 )
 
 func main() {

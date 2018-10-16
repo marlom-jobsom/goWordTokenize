@@ -2,9 +2,9 @@ package util
 
 import (
 	"fmt"
+	"github.com/marlom-jobsom/goWordTokenize/internal/communication"
+	"github.com/marlom-jobsom/goWordTokenize/internal/util"
 	"time"
-	"word-tokenize-in1118/internal/communication"
-	"word-tokenize-in1118/internal/util"
 )
 
 // SumResponsesDuration sums the duration of all responses given

@@ -2,13 +2,13 @@ package main
 
 import (
 	"fmt"
+	"github.com/marlom-jobsom/goWordTokenize/cmd/experiments/util"
+	"github.com/marlom-jobsom/goWordTokenize/internal/communication"
+	"github.com/marlom-jobsom/goWordTokenize/internal/constant"
+	"github.com/marlom-jobsom/goWordTokenize/internal/layers/distribution/client"
+	"github.com/marlom-jobsom/goWordTokenize/internal/layers/infrastructure/server"
 	"log"
 	"time"
-	"word-tokenize-in1118/cmd/experiments/util"
-	"word-tokenize-in1118/internal/communication"
-	"word-tokenize-in1118/internal/constant"
-	"word-tokenize-in1118/internal/layers/distribution/client"
-	"word-tokenize-in1118/internal/layers/infrastructure/server"
 )
 
 // TestRPC tests the RPC communication timing for the client_request_handler side

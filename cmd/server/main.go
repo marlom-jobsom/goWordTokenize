@@ -2,10 +2,10 @@ package main
 
 import (
 	"fmt"
+	"github.com/marlom-jobsom/goWordTokenize/internal"
+	"github.com/marlom-jobsom/goWordTokenize/internal/constant"
+	"github.com/marlom-jobsom/goWordTokenize/internal/layers/infrastructure/server"
 	"log"
-	"word-tokenize-in1118/internal"
-	"word-tokenize-in1118/internal/constant"
-	"word-tokenize-in1118/internal/layers/infrastructure/server"
 )
 
 func main() {

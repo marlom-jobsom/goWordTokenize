@@ -2,9 +2,9 @@ package client
 
 import (
 	"fmt"
+	"github.com/marlom-jobsom/goWordTokenize/internal/communication"
+	"github.com/marlom-jobsom/goWordTokenize/internal/constant"
 	"log"
-	"word-tokenize-in1118/internal/communication"
-	"word-tokenize-in1118/internal/constant"
 )
 
 // Proxy route the invoke through the requestor

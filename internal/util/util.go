@@ -2,10 +2,10 @@ package util
 
 import (
 	"bufio"
+	"github.com/marlom-jobsom/goWordTokenize/internal/constant"
 	"net"
 	"net/rpc"
 	"os"
-	"word-tokenize-in1118/internal/constant"
 )
 
 // CreateFileIfDoestNotExists creates a file for the path given if it doesn't exists
